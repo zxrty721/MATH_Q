@@ -31,24 +31,24 @@ export const AuthPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-950 via-[#0f172a] to-[#172554] flex items-center justify-center p-4 font-sans text-slate-100 relative overflow-hidden">
-      <div className="absolute top-[-20%] left-[-10%] w-[500px] h-[500px] bg-cyan-500/10 rounded-full blur-[100px] pointer-events-none" />
-      <div className="absolute bottom-[-20%] right-[-10%] w-[500px] h-[500px] bg-blue-600/10 rounded-full blur-[100px] pointer-events-none" />
+    <div className="min-h-screen w-full bg-gradient-to-br from-slate-950 via-[#0f172a] to-[#172554] flex items-center justify-center p-4 font-sans text-slate-100 relative overflow-hidden">
+      {/* Blobs hidden on small screens to prevent overflow/distraction */}
+      <div className="absolute top-[-20%] left-[-10%] w-[500px] h-[500px] bg-cyan-500/10 rounded-full blur-[100px] pointer-events-none hidden md:block" />
+      <div className="absolute bottom-[-20%] right-[-10%] w-[500px] h-[500px] bg-blue-600/10 rounded-full blur-[100px] pointer-events-none hidden md:block" />
 
-      <div className="bg-[#1e293b]/90 border border-slate-600 p-8 rounded-[2.5rem] shadow-2xl w-full max-w-md backdrop-blur-xl relative z-10 animate-in fade-in zoom-in duration-300">
+      <div className="bg-[#1e293b]/90 border border-slate-600 p-6 md:p-8 rounded-[2rem] shadow-2xl w-full max-w-sm md:max-w-md backdrop-blur-xl relative z-10 animate-in fade-in zoom-in duration-300">
         
-        {/* Logo Section */}
         <div className="flex flex-col items-center mb-6">
           <div className="p-3 bg-gradient-to-br from-cyan-500 to-blue-600 rounded-2xl shadow-lg mb-3">
-             <Calculator className="text-white" size={32} />
+             <Calculator className="text-white" size={28} />
           </div>
-          <h2 className="text-4xl font-black text-white tracking-tight">
+          <h2 className="text-3xl md:text-4xl font-black text-white tracking-tight text-center">
             MATH<span className="text-cyan-400">_Q</span>
           </h2>
-          <p className="text-slate-400 text-sm mt-1">เกมตอบคำถามคณิตศาสตร์และเลขฐาน</p>
+          <p className="text-slate-400 text-xs md:text-sm mt-1">เกมตอบคำถามคณิตศาสตร์และเลขฐาน</p>
         </div>
 
-        <p className="text-slate-300 text-center mb-6 text-sm bg-slate-800/50 py-2 rounded-lg border border-slate-700">
+        <p className="text-slate-300 text-center mb-6 text-xs md:text-sm bg-slate-800/50 py-2 rounded-lg border border-slate-700">
           {isLogin ? 'เข้าสู่ระบบเพื่อเริ่มเล่น' : 'สมัครสมาชิกใหม่ (เข้าเล่นได้ทันที)'}
         </p>
 
@@ -60,7 +60,7 @@ export const AuthPage = () => {
               required
               value={email}
               onChange={e => setEmail(e.target.value)}
-              className="w-full bg-[#0f172a] border border-slate-700 rounded-xl p-4 text-white focus:border-cyan-400 outline-none transition-all focus:ring-2 focus:ring-cyan-500/20"
+              className="w-full bg-[#0f172a] border border-slate-700 rounded-xl p-3 md:p-4 text-white focus:border-cyan-400 outline-none transition-all focus:ring-2 focus:ring-cyan-500/20 text-base" 
               placeholder="name@example.com"
             />
           </div>
@@ -72,20 +72,20 @@ export const AuthPage = () => {
               required
               value={password}
               onChange={e => setPassword(e.target.value)}
-              className="w-full bg-[#0f172a] border border-slate-700 rounded-xl p-4 text-white focus:border-cyan-400 outline-none transition-all focus:ring-2 focus:ring-cyan-500/20"
+              className="w-full bg-[#0f172a] border border-slate-700 rounded-xl p-3 md:p-4 text-white focus:border-cyan-400 outline-none transition-all focus:ring-2 focus:ring-cyan-500/20 text-base"
               placeholder="••••••••"
             />
           </div>
 
           {msg && (
-            <div className="text-sm text-center p-3 rounded-lg bg-rose-500/20 text-rose-400 border border-rose-500/30">
+            <div className="text-xs md:text-sm text-center p-3 rounded-lg bg-rose-500/20 text-rose-400 border border-rose-500/30">
               {msg}
             </div>
           )}
 
           <button 
             disabled={loading}
-            className="mt-2 py-4 bg-gradient-to-r from-cyan-500 to-blue-600 rounded-xl font-bold text-white flex justify-center items-center gap-2 hover:scale-[1.02] active:scale-95 transition-all shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
+            className="mt-2 py-3 md:py-4 bg-gradient-to-r from-cyan-500 to-blue-600 rounded-xl font-bold text-white flex justify-center items-center gap-2 hover:scale-[1.02] active:scale-95 transition-all shadow-lg disabled:opacity-50 disabled:cursor-not-allowed touch-manipulation"
           >
             {loading ? <Loader2 className="animate-spin" /> : (isLogin ? <LogIn size={20}/> : <UserPlus size={20}/>)}
             {isLogin ? 'เข้าสู่ระบบ' : 'สมัครสมาชิก & เข้าเล่น'}
@@ -97,7 +97,7 @@ export const AuthPage = () => {
           <button 
             type="button"
             onClick={() => { setIsLogin(!isLogin); setMsg(''); }}
-            className="ml-2 text-cyan-400 font-bold hover:underline hover:text-cyan-300 transition-colors"
+            className="ml-2 text-cyan-400 font-bold hover:underline hover:text-cyan-300 transition-colors p-2"
           >
             {isLogin ? "สมัครสมาชิก" : "เข้าสู่ระบบ"}
           </button>
