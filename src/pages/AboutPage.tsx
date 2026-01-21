@@ -5,19 +5,19 @@ export const AboutPage = () => {
   const creators = [
     { 
       name: 'อนุศิษฏ์ จันทร์', 
-      role: 'Developer', 
+      role: 'Web Developer', 
       image: 'https://img.pbntc.site/tar2.jpeg', 
       fbLink: 'https://www.facebook.com/share/1AUWav7cFM/' 
     },
     { 
       name: 'วริสา พานแก้ว', 
-      role: 'Developer', 
+      role: 'Web designer', 
       image: 'https://img.pbntc.site/urm.jpeg', 
       fbLink: 'https://www.facebook.com/a.pearl.iris?' 
     },
     { 
       name: 'กมลพรรณ เพชรบาง', 
-      role: 'Developer', 
+      role: 'Testing', 
       image: 'https://img.pbntc.site/yok.jpeg', 
       fbLink: 'https://www.facebook.com/share/1FxmBD5P8h/' 
     },

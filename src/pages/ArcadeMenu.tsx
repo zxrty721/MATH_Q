@@ -76,7 +76,7 @@ export const ArcadeMenu = () => {
       {/* Grid of Games */}
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 overflow-y-auto custom-scrollbar p-2 pb-20">
         {GAMES.filter(game => {
-            if (currentBase === 2 && (game.id === 'math-snake')) {
+            if (currentBase === 2 && (game.id === 'math-snake' || game.id === 'memory-card')) {
                 return false;
             }
             return true;
