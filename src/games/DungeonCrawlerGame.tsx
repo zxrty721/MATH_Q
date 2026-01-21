@@ -331,43 +331,53 @@ export const DungeonCrawlerGame = () => {
                                 </div>
                             </div>
 
-                            {/* Challenge Section */}
-                            {question && (
-                                <div className="w-full mt-2 space-y-4">
-                                    {/* Rune Stone (Question) */}
-                                    <div className="relative bg-[#2a2a35] p-6 rounded-md border-2 border-[#3f3f4e] text-center shadow-[inset_0_2px_10px_rgba(0,0,0,0.5)]">
-                                        <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-[#13131a] px-3 text-[10px] text-slate-500 uppercase tracking-[0.3em] border border-[#3f3f4e]">
-                                            Rune Code
-                                        </div>
-                                        <div className="text-5xl font-black text-transparent bg-clip-text bg-gradient-to-b from-white to-slate-400 font-mono tracking-widest drop-shadow-sm">
-                                            {question.display}
-                                        </div>
-                                    </div>
+                           // --- ส่วนที่ปรับปรุงภายใน DungeonCrawlerGame.tsx ---
+
+{/* Challenge Section */}
+{question && (
+    <div className="w-full mt-2 space-y-3 md:space-y-4">
+        {/* ✅ ปรับปรุงหินรูน (Question) ให้รองรับตัวเลขยาวๆ */}
+        <div className="relative bg-[#2a2a35] p-4 md:p-6 rounded-md border-2 border-[#3f3f4e] text-center shadow-[inset_0_2px_10px_rgba(0,0,0,0.5)] min-h-[80px] flex items-center justify-center overflow-hidden">
+            <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-[#13131a] px-3 text-[8px] md:text-[10px] text-slate-500 uppercase tracking-[0.3em] border border-[#3f3f4e] whitespace-nowrap">
+                Rune Code
+            </div>
+            
+            {/* ✅ ใช้ Dynamic Font Size ตามความยาวตัวเลข (เหมือน QuickMath) */}
+            <div className={`font-black text-transparent bg-clip-text bg-gradient-to-b from-white to-slate-400 font-mono tracking-widest drop-shadow-sm break-all leading-tight
+                ${question.display.length > 12 ? 'text-xl md:text-3xl' : 
+                  question.display.length > 8 ? 'text-3xl md:text-5xl' : 
+                  'text-4xl md:text-6xl'}`}>
+                {question.display}
+            </div>
+        </div>
 
                                     {/* Action Buttons (Runes) */}
-                                    <div className="grid grid-cols-2 gap-4">
+                                    <div className="grid grid-cols-2 gap-3 md:gap-4">
                                         {options.map((opt, i) => (
                                             <button 
                                                 key={i}
                                                 onClick={() => handleChoice(opt.isCorrect)}
                                                 disabled={isProcessing} 
-                                                className={`relative group h-24 rounded-md border-b-4 transition-all active:border-b-0 active:translate-y-1 disabled:cursor-not-allowed
+                                                className={`relative group h-20 md:h-24 rounded-md border-b-4 transition-all active:border-b-0 active:translate-y-1 disabled:opacity-50
                                                     ${isProcessing 
                                                         ? 'bg-slate-800 border-slate-900 text-slate-600' 
                                                         : 'bg-[#333340] border-[#1a1a20] hover:bg-[#3e3e4d] text-slate-200'
                                                     }`}
                                             >
-                                                {/* Button Glow on Hover */}
                                                 <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity bg-gradient-to-t from-cyan-500/10 to-transparent pointer-events-none" />
                                                 
-                                                <div className="flex flex-col items-center justify-center gap-1 relative z-10">
+                                                <div className="flex flex-col items-center justify-center gap-0.5 md:gap-1 relative z-10 px-1">
                                                     {currentEvent?.type.includes('MONSTER') || currentEvent?.type === 'BOSS' ? 
-                                                        <Sword size={20} className={`transition-colors ${isProcessing ? "" : "group-hover:text-red-400 text-slate-500"}`} /> :
-                                                     currentEvent?.type === 'TRAP' ? 
-                                                        <ShieldCheck size={20} className={`transition-colors ${isProcessing ? "" : "group-hover:text-blue-400 text-slate-500"}`} /> :
-                                                        <ArrowRight size={20} className={`transition-colors ${isProcessing ? "" : "group-hover:text-green-400 text-slate-500"}`} />
+                                                        <Sword size={18} className="text-slate-500" /> :
+                                                    currentEvent?.type === 'TRAP' ? 
+                                                        <ShieldCheck size={18} className="text-slate-500" /> :
+                                                        <ArrowRight size={18} className="text-slate-500" />
                                                     }
-                                                    <span className="text-2xl font-bold font-mono group-hover:text-white transition-colors">{opt.val}</span>
+                                                    {/* ✅ ปรับขนาดตัวเลือกให้เล็กลงหากคำตอบยาว */}
+                                                    <span className={`font-bold font-mono group-hover:text-white transition-colors break-all
+                                                        ${opt.val.length > 8 ? 'text-sm md:text-xl' : 'text-xl md:text-2xl'}`}>
+                                                        {opt.val}
+                                                    </span>
                                                 </div>
                                             </button>
                                         ))}
